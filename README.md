@@ -69,15 +69,12 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 ~~~
 
 ## `%diagram_box()` macro <a name="diagrambox-macro-1"></a> ######
-
-Macro Name:    diagram_box  
    Purpose:
-     Creates a rectangular box (polygon) and corresponding
-     text annotation dataset for use in flow diagrams.
-     The macro generates two datasets:
-       - diagram_box_<boxid>:  Coordinates of the box
-       - diagram_box_text_<boxid>: Position and content of text
- 
+     Creates a rectangular box (polygon) and corresponding text annotation dataset for use in flow diagrams.  
+     The macro generates two datasets:  
+       - diagram_box_<boxid>:  Coordinates of the box  
+       - diagram_box_text_<boxid>: Position and content of text  
+   
    Parameters:  
    ~~~text
      boxid      = Unique identifier for the box (default=1)
