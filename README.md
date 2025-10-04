@@ -69,7 +69,7 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 ~~~
 
 ## `%diagram_box()` macro <a name="diagrambox-macro-1"></a> ######
-   Purpose:
+   Purpose:  
      Creates a rectangular box (polygon) and corresponding text annotation dataset for use in flow diagrams.  
      The macro generates two datasets:  
        - diagram_box_<boxid>:  Coordinates of the box  
@@ -117,6 +117,42 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
              #- Declined to participate (n=4)
              #- Other reasons (n=2)
     );
+~~~
+  
+---
+
+## `%diagram_line()` macro <a name="diagramline-macro-2"></a> ######
+ Purpose    : Create a dataset containing line coordinates (start → [mid] → end).  
+              Useful for plotting diagrams where lines are defined by 2 or 3 points.  
+  
+ Parameters :  
+ ~~~text
+   lineid      = (numeric, default=1)
+                 Identifier for the line. Used as a variable in the output dataset name.
+
+   start_x     = (numeric, default=30)
+   start_y     = (numeric, default=90)
+                 Coordinates of the starting point of the line.
+
+   midpoint_x  = (numeric, optional)
+   midpoint_y  = (numeric, optional)
+                 Coordinates of an optional midpoint. If both are provided,
+                 the line will include this point.
+
+   end_x       = (numeric, default=30)
+   end_y       = (numeric, default=60)
+                 Coordinates of the end point of the line.
+~~~
+ Output     :
+   A dataset named diagram_line_<lineid> with variables:  
+     - lineid : the line identifier  
+     - line_x : x coordinate of points  
+     - line_y : y coordinate of points  
+  
+ Example    :  
+~~~sas
+   %diagram_line(lineid=2, start_x=10, start_y=20, midpoint_x=15, midpoint_y=25, end_x=30, end_y=40);
+   → Produces dataset diagram_line_2 with 3 points: (10,20) → (15,25) → (30,40)
 ~~~
   
 ---
