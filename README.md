@@ -67,3 +67,59 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 /*plot*/
 %diagram_plot();
 ~~~
+
+## `%diagram_box()` macro <a name="diagrambox-macro-1"></a> ######
+
+Macro Name:    diagram_box  
+   Purpose:
+     Creates a rectangular box (polygon) and corresponding
+     text annotation dataset for use in flow diagrams.
+     The macro generates two datasets:
+       - diagram_box_<boxid>:  Coordinates of the box
+       - diagram_box_text_<boxid>: Position and content of text
+ 
+   Parameters:  
+   ~~~text
+     boxid      = Unique identifier for the box (default=1)
+     left_x     = X coordinate of the left edge   (default=10)
+     top_y      = Y coordinate of the top edge    (default=100)
+     right_x    = X coordinate of the right edge  (default=30)
+     bottom_y   = Y coordinate of the bottom edge (default=90)
+     text       = Label text to be displayed inside the box
+     text_just  = Text justification (CENTER [default] or LEFT)
+ ~~~
+
+   Notes:
+     - Coordinates define an axis-aligned rectangle.
+     - Text position is calculated based on justification:
+         CENTER → centered at the box
+          LEFT   → aligned to the left edge, vertically centered
+     - Text can include line breaks using the SPLITCHAR in SGPLOT.
+     - The macro is typically used in combination with diagram_line
+       and diagram_plot to build flow diagrams (e.g., CONSORT).
+
+  Usage Example:
+  ~~~sas
+    %diagram_box(
+        boxid=1,
+        left_x=30,
+        top_y=100,
+        right_x=70,
+        bottom_y=90,
+        text=Assessed for eligibility (n=100)
+    );
+ 
+    %diagram_box(
+        boxid=2,
+        left_x=65,
+        top_y=86,
+        right_x=95,
+        bottom_y=60,
+        text_just=left,
+        text=Excluded (n=10)#- Not meeting inclusion criteria (n=4)
+             #- Declined to participate (n=4)
+             #- Other reasons (n=2)
+    );
+~~~
+  
+---
