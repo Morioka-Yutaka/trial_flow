@@ -156,3 +156,116 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 ~~~
   
 ---
+
+## `%diagram_plot()` macro <a name="diagramplot-macro-3"></a> ######
+  Purpose:  
+    Combines all generated diagram components (boxes, text, and lines) and plots them as a flow diagram using PROC SGPLOT.  
+    The macro collects all datasets prefixed with "diagram_" and produces a complete diagram without axes or borders.  
+  
+  Parameters:  
+  ~~~text
+    minx  = Minimum value of the X-axis (default=0)
+    maxx  = Maximum value of the X-axis (default=100)
+    miny  = Minimum value of the Y-axis (default=0)
+    maxy  = Maximum value of the Y-axis (default=100)
+~~~
+  Notes:  
+    - This macro expects that %diagram_box and %diagram_line have already been called to create the component datasets.  
+    - Text is automatically split by the SPLITCHAR (#) option.  
+    - Arrows are drawn for lines with arrowhead at the end.  
+  
+  Usage Example:  
+~~~sas
+    %diagram_box(
+        boxid=1,
+        left_x=30, top_y=100,
+        right_x=70, bottom_y=90,
+        text=Assessed for eligibility (n=100)
+    );
+
+    %diagram_line(
+        lineid=1,
+        start_x=50, start_y=90,
+        end_x=50,   end_y=55
+    );
+
+    %diagram_box(
+        boxid=2,
+        left_x=37, top_y=55,
+        right_x=63, bottom_y=45,
+        text=Randomized (n=90)
+    );
+
+    %diagram_plot(minx=0, maxx=100, miny=0, maxy=100);
+~~~
+  
+---
+
+
+## Notes on versions history
+
+- 0.1.0(05October2025): Initial version.
+
+---
+
+## What is SAS Packages?
+
+The package is built on top of **SAS Packages Framework(SPF)** developed by Bartosz Jablonski.
+
+For more information about the framework, see [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES).
+
+You can also find more SAS Packages (SASPacs) in the [SAS Packages Archive(SASPAC)](https://github.com/SASPAC).
+
+## How to use SAS Packages? (quick start)
+
+### 1. Set-up SAS Packages Framework
+
+First, create a directory for your packages and assign a `packages` fileref to it.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+filename packages "\path\to\your\packages";
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Secondly, enable the SAS Packages Framework.
+(If you don't have SAS Packages Framework installed, follow the instruction in 
+[SPF documentation](https://github.com/yabwon/SAS_PACKAGES/tree/main/SPF/Documentation) 
+to install SAS Packages Framework.)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+%include packages(SPFinit.sas)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### 2. Install SAS package
+
+Install SAS package you want to use with the SPF's `%installPackage()` macro.
+
+- For packages located in **SAS Packages Archive(SASPAC)** run:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+  %installPackage(packageName)
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- For packages located in **PharmaForest** run:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+  %installPackage(packageName, mirror=PharmaForest)
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- For packages located at some network location run:
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+  %installPackage(packageName, sourcePath=https://some/internet/location/for/packages)
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  (e.g. `%installPackage(ABC, sourcePath=https://github.com/SomeRepo/ABC/raw/main/)`)
+
+
+### 3. Load SAS package
+
+Load SAS package you want to use with the SPF's `%loadPackage()` macro.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sas
+%loadPackage(packageName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### Enjoy!
+
+
