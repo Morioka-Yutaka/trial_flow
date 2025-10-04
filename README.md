@@ -86,14 +86,14 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
      text_just  = Text justification (CENTER [default] or LEFT)
  ~~~
 
-   Notes:
-     - Coordinates define an axis-aligned rectangle.
-     - Text position is calculated based on justification:
-         CENTER → centered at the box
-          LEFT   → aligned to the left edge, vertically centered
-     - Text can include line breaks using the SPLITCHAR in SGPLOT.
-     - The macro is typically used in combination with diagram_line
-       and diagram_plot to build flow diagrams (e.g., CONSORT).
+   Notes:  
+     - Coordinates define an axis-aligned rectangle.  
+     - Text position is calculated based on justification:  
+         CENTER → centered at the box  
+          LEFT   → aligned to the left edge, vertically centered  
+     - Text can include line breaks using the SPLITCHAR in SGPLOT.  
+     - The macro is typically used in combination with diagram_line  
+       and diagram_plot to build flow diagrams (e.g., CONSORT).  
 
   Usage Example:
   ~~~sas
