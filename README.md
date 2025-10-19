@@ -4,7 +4,8 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 <img width="360" height="360" alt="Image" src="https://github.com/user-attachments/assets/4d789264-366b-4ced-b825-6d0e52d99073" />
 
 ## Usage Example
-<img width="489" height="368" alt="Image" src="https://github.com/user-attachments/assets/327e626a-8d09-4c05-8124-3dd6c26be119" />
+<img width="489" height="368" alt="Image" src="https://github.com/user-attachments/assets/327e626a-8d09-4c05-8124-3dd6c26be119" />  
+
 ~~~sas
 %diagram_box(boxid=1,
                     left_x=30,top_y=100
