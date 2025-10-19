@@ -12,6 +12,7 @@ Macro name:    diagram_plot
     maxx  = Maximum value of the X-axis (default=100)
     miny  = Minimum value of the Y-axis (default=0)
     maxy  = Maximum value of the Y-axis (default=100)
+    text_font = Text font (default=Courier)
 
   Notes:
     - This macro expects that %diagram_box and %diagram_line
@@ -44,17 +45,21 @@ Macro name:    diagram_plot
 
 *//*** HELP END ***/
 
-%macro diagram_plot(minx=0,maxx=100,miny=0,maxy=100);
+%macro diagram_plot(minx=0,maxx=100,miny=0,maxy=100,text_font=Courier);
 data plot_diag;
 length text text2 $1000.;
 set diagram_:;
 run;
 
-proc sgplot data=plot_diag noborder noautolegend;
-  polygon id=boxid x=box_x y=box_y;
-  text x=text_x y=text_y text=text / textattrs=(size=12 )  splitchar='#' splitpolicy=splitalways;
-  text x=text_x2 y=text_y2 text=text2 / textattrs=(size=12 )  position=right splitchar='#' splitpolicy=splitalways;
-  series x=line_x y=line_y/ group=lineid  lineattrs=(color=black) arrowheadshape=filled arrowheadpos=end  arrowheadscale=0.3;
+data plot_diag_attr;
+set diag_style_: line_style_:;
+run;
+
+proc sgplot data=plot_diag noborder noautolegend dattrmap=plot_diag_attr;
+  polygon id=boxid x=box_x y=box_y/attrid=DIAGID group=DIAGID;
+  text x=text_x y=text_y text=text /textattrs=(family="&text_font") attrid=DIAGID group=DIAGID sizemin=1pt sizemaxresponse=100 sizemax=100pt sizeresponse = sizeresponse  splitchar='#' splitpolicy=splitalways;
+  text x=text_x2 y=text_y2 text=text2 /textattrs=(family="&text_font") attrid=DIAGID group=DIAGID  sizemin=1pt sizemaxresponse=100 sizemax=100pt sizeresponse = sizeresponse  sizeresponse = sizeresponse  position=right splitchar='#' splitpolicy=splitalways;
+  series x=line_x y=line_y/ attrid=_LINEID  group=_LINEID  arrowheadshape=filled arrowheadpos=end  arrowheadscale=0.3;
 
   xaxis display=none min=&minx. max=&maxx. offsetmin=0 offsetmax=0;
   yaxis display=none min=&miny. max=&maxy. offsetmin=0 offsetmax=0;
