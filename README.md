@@ -163,6 +163,11 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
      bottom_y   = Y coordinate of the bottom edge (default=90)
      text       = Label text to be displayed inside the box
      text_just  = Text justification (CENTER [default] or LEFT)
+     text_size = Text font size [1-100 pt] (default =10 pt)
+     text_color = Text font color (default = black)
+     linecolor = Box linecolor (default = black)
+     linepattern = Box linepattern (default=Solid)
+     linethickness = Box linethickness (default=1)
  ~~~
 
    Notes:  
@@ -221,6 +226,11 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
    end_x       = (numeric, default=30)
    end_y       = (numeric, default=60)
                  Coordinates of the end point of the line.
+
+   linecolor    = Lline color (default = black)
+   linepattern = Line pattern (default=Solid)
+   linethickness = Linethickness (default=1)
+
 ~~~
  Output     :
    A dataset named diagram_line_<lineid> with variables:  
@@ -247,6 +257,7 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
     maxx  = Maximum value of the X-axis (default=100)
     miny  = Minimum value of the Y-axis (default=0)
     maxy  = Maximum value of the Y-axis (default=100)
+    text_font = Text font (default=Courier)
 ~~~
   Notes:  
     - This macro expects that %diagram_box and %diagram_line have already been called to create the component datasets.  
@@ -283,6 +294,9 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 
 ## Notes on versions history
 
+- 0.2.0(20October2025): %diagram_box() Add parameters: text_size, text_color, linecolor, linepattern, linethickness.
+                        %diagram_line() Add parameters: linecolor, linepattern, linethickness.
+                        diagram_plot() Add parameter: text_font
 - 0.1.0(05October2025): Initial version.
 
 ---
