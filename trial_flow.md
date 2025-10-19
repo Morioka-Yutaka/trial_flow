@@ -9,17 +9,17 @@
 ### Version information:
   
 - Package: trial_flow
-- Version: 0.1.0
-- Generated: 2025-10-05T01:24:11
+- Version: 0.2.0
+- Generated: 2025-10-20T04:39:09
 - Author(s): Yutaka Morioka(sasyupi@gmail.com)
 - Maintainer(s): Yutaka Morioka(sasyupi@gmail.com)
 - License: MIT
-- File SHA256: `F*18B97BF9AD4E17D14A27A8E3E29A3C98D2F71A85A4F06AAF01E97FD010F0993C` for this version
-- Content SHA256: `C*4253475CD10A3A113AEA674AA15EA48823C5B883BD26D9BE1E9A1C5E0B124887` for this version
+- File SHA256: `F*E26ACAC437203250576AA2CF5479E770E5DE25534C52FD2E16DDA07458116374` for this version
+- Content SHA256: `C*03336DD304F66B116C6DAC4F55313359654FF521B2BEF10F4E4CB921F93897BE` for this version
   
 ---
  
-# The `trial_flow` package, version: `0.1.0`;
+# The `trial_flow` package, version: `0.2.0`;
   
 ---
  
@@ -72,12 +72,17 @@ Macro Name:    diagram_box
      bottom_y   = Y coordinate of the bottom edge (default=90)
      text       = Label text to be displayed inside the box
      text_just  = Text justification (CENTER [default] or LEFT)
- 
+     text_size = Text font size [1-100 pt] (default =10 pt)
+     text_color = Text font color (default = black)
+     linecolor = Box linecolor (default = black)
+     linepattern = Box linepattern (default=Solid)
+     linethickness = Box linethickness (default=1)
+
    Notes:
      - Coordinates define an axis-aligned rectangle.
      - Text position is calculated based on justification:
-         CENTER → centered at the box
-          LEFT   → aligned to the left edge, vertically centered
+         CENTER 竊・centered at the box
+          LEFT   竊・aligned to the left edge, vertically centered
      - Text can include line breaks using the SPLITCHAR in SGPLOT.
      - The macro is typically used in combination with diagram_line
        and diagram_plot to build flow diagrams (e.g., CONSORT).
@@ -110,8 +115,8 @@ Macro Name:    diagram_box
 ## `%diagram_line()` macro <a name="diagramline-macro-2"></a> ######
 
 Macro Name : diagram_line
- Purpose    : Create a dataset containing line coordinates (start → [mid] → end).
-              Useful for plotting diagrams where lines are defined by 2 or 3 points.
+Purpose : Create a dataset containing line coordinates (start -> [mid] -> end).
+Useful for plotting diagrams where lines are defined by 2 or 3 points.
 
  Parameters :
    lineid      = (numeric, default=1)
@@ -130,6 +135,11 @@ Macro Name : diagram_line
    end_y       = (numeric, default=60)
                  Coordinates of the end point of the line.
 
+   linecolor    = Lline color (default = black)
+   linepattern = Line pattern (default=Solid)
+   linethickness = Linethickness (default=1)
+
+
  Output     :
    A dataset named diagram_line_<lineid> with variables:
      - lineid : the line identifier
@@ -138,7 +148,7 @@ Macro Name : diagram_line
 
  Example    :
    %diagram_line(lineid=2, start_x=10, start_y=20, midpoint_x=15, midpoint_y=25, end_x=30, end_y=40);
-   → Produces dataset diagram_line_2 with 3 points: (10,20) → (15,25) → (30,40)
+  -> Produces dataset diagram_line_2 with 3 points: (10,20) -> (15,25) -> (30,40)
 
   
 ---
@@ -157,6 +167,7 @@ Macro name:    diagram_plot
     maxx  = Maximum value of the X-axis (default=100)
     miny  = Minimum value of the Y-axis (default=0)
     maxy  = Maximum value of the Y-axis (default=100)
+    text_font = Text font (default=Courier)
 
   Notes:
     - This macro expects that %diagram_box and %diagram_line
