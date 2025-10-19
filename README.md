@@ -294,9 +294,9 @@ A SAS macro package for creating flow diagrams, including CONSORT diagrams, with
 
 ## Notes on versions history
 
-- 0.2.0(20October2025): %diagram_box() Add parameters: text_size, text_color, linecolor, linepattern, linethickness.
-                        %diagram_line() Add parameters: linecolor, linepattern, linethickness.
-                        diagram_plot() Add parameter: text_font
+- 0.2.0(20October2025): %diagram_box() Add parameters: text_size, text_color, linecolor, linepattern, linethickness.  
+                        %diagram_line() Add parameters: linecolor, linepattern, linethickness.  
+                        diagram_plot() Add parameter: text_font  
 - 0.1.0(05October2025): Initial version.
 
 ---
